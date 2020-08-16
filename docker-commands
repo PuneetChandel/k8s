@@ -1,0 +1,50 @@
+1. Create a container
+$docker create <image> → will give container ID
+
+2.Start/Restart container
+$docker start -a <container id> → -a for showing output on the command line
+
+With restart we cannot change the default command that was used to create the container
+
+3. Create and Start a container from an Image
+$docker run <image> 
+$docker run <image> <Default command>
+$ docker run busybox echo Hello
+$ docker run -p 5000:8080 pchandel09/simpleweb:latest → Port Mapping
+
+4. List running containers
+$docker ps → running containers 
+$docker ps --all  → all containers 
+
+5. Delete all containers including images from docker hub
+$ docker system prune
+WARNING! This will remove:
+  - all stopped containers
+  - all networks not used by at least one container
+  - all dangling images
+  - all dangling build cache
+
+6. Retrieving Logs
+$docker logs <container_id>
+
+7. Stopping containers
+$docker stop <container_id> → graceful, allows for cleanup
+$docker  kill <container_id> → shutdown now no cleanup
+
+8. Execute command inside a running container
+$docker exec -it df778d6c0fdd redis-cli
+
+9.Terminal/shell access inside Container
+$docker exec -it df778d6c0fdd sh
+
+10. Build image from Dockerfile
+$docker build .  → 55f0d3b612f4
+$docker run 55f0d3b612f4
+
+11. Add Tag to image
+$docker build -t <dockerid>/tag.  
+$docker build -t pchandel/redis:latest . 
+$docker run pxhandel09/redis:latest
+
+12.Push image to DockerHUB
+$ docker push pchandel/myproject 

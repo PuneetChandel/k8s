@@ -4,8 +4,7 @@
 kubectl cluster-info
 
 2. Run Pods
-kubectl run nginx → Create Pod, deploy the Ngnix using image from docker hub
-kubectl run nginx --image ngnix
+kubectl run nginx --image ngnix [Create Pod, deploy the Ngnix using image from docker hub]
 
 3. Create/Update Objects in K8s 
 kubectl apply -f client-pod.yaml

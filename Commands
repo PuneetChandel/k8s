@@ -53,3 +53,7 @@ $kubectl create secret generic pgpassword --from-literal PGPASSWORD=12345asdf
 12. Edit the k8s pod file
 $ kubectl edit pod myapp-pod
 
+13. Generate pod definition
+$ kubectl get pod <pod-name> -o yaml > pod-definition.yaml
+
+

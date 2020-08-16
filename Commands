@@ -5,6 +5,8 @@ $kubectl cluster-info
 
 2. Run Pods
 $kubectl run nginx --image ngnix [Create Pod, deploy the Ngnix using image from docker hub]
+OR
+$kubectl create -f pod-definition.yml [using a yaml file ]
 
 3. Create/Update Objects in K8s 
 $kubectl apply -f client-pod.yaml
@@ -28,6 +30,7 @@ $kubectl get nodes
 $kubectl describe pods client-pod
 
 7. Delete POD
+$kubectl delete pod <pod> [pod and podsa both work]
 $kubectl delete pods <pod>
 $kubectl delete -f client-pod.yaml
 $kubectl delete deployment client-deployment
@@ -46,3 +49,7 @@ $kubectl set image deployment/client-deployment client=pchandel/multi-client:v5
 
 11. Create Secret
 $kubectl create secret generic pgpassword --from-literal PGPASSWORD=12345asdf
+
+12. Edit the k8s pod file
+$ kubectl edit pod myapp-pod
+

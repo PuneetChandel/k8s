@@ -3,15 +3,19 @@
 1. Check Status of cluster
 $kubectl cluster-info
 
-2. Run Pods
-$kubectl run nginx --image ngnix --> Create Pod, deploy the Ngnix using image from docker hub
-$kubectl create -f pod-definition.yml --> using a yaml file 
-
 3. Create 
 $kubectl create -f pod-definition.yml
 $kubectl create -f replicaSet-definition.yml
 $kubectl create deployment --image=nginx nginx --> without defn file
 
+3. Imperative commands
+$kubectl run nginx --image ngnix 
+$kubectl create deployment --image=nginx mynginx 
+$kubectl expose pod myapp-pod --port=6379 --name redis-service --type=ClusterIP 
+$kubectl expose pod nginx-pod --port=80   --name nginx-service --type=NodePort
+
+$kubectl create service clusterip redis --tcp=6379:6379 --> will assume selectors as app=redis
+$kubectl create service nodeport  nginx --tcp=80:80 --node-port=30080
 
 4. Dry run
 $kubectl create deployment --image=nginx mynginx --dry-run -o yaml
@@ -22,6 +26,7 @@ $kubectl expose pod myapp-pod --port=6379 --name redis-service --dry-run -o yaml
 5. service
 Expose --> This will automatically use the pod's labels as selectors
 Create --> This will not use the pods labels as selectors, instead it will assume selectors as app
+type -->  "ClusterIP", "ExternalName", "LoadBalancer", "NodePort"
 
 $kubectl expose pod redis-pod --port=6379 --name redis-service
 $kubectl expose pod myapp-pod --port=6379 --name redis-service --dry-run -o yaml --> Create a Service redis-service type ClusterIP & expose pod on port 6379

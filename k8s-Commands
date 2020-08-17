@@ -3,7 +3,8 @@
 1. Check Status of cluster
 $kubectl cluster-info
 
-## 3. Create 
+## Create 
+3. Create 
 $kubectl create -f pod-definition.yml
 $kubectl create -f replicaSet-definition.yml
 $kubectl create deployment --image=nginx nginx --> without defn file

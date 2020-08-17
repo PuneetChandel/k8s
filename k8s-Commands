@@ -3,12 +3,12 @@
 1. Check Status of cluster
 $kubectl cluster-info
 
-3. Create 
+## 3. Create 
 $kubectl create -f pod-definition.yml
 $kubectl create -f replicaSet-definition.yml
 $kubectl create deployment --image=nginx nginx --> without defn file
 
-3. Imperative commands
+## 3. Imperative commands
 $kubectl run nginx --image ngnix 
 $kubectl run nginx-pod --image=nginx:alpine
 $kubectl run redis --image redis:alpine -l tier=db

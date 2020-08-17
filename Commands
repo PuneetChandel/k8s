@@ -4,27 +4,35 @@
 $kubectl cluster-info
 
 2. Run Pods
-$kubectl run nginx --image ngnix [Create Pod, deploy the Ngnix using image from docker hub]
-OR
-$kubectl create -f pod-definition.yml [using a yaml file ]
+$kubectl run nginx --image ngnix --> Create Pod, deploy the Ngnix using image from docker hub
+$kubectl create -f pod-definition.yml --> using a yaml file 
 
-3. Create/Update Objects in K8s 
-$kubectl apply -f client-pod.yaml
-$kubectl apply -f client-node-port.yaml
-- Use deployment file
-$kubectl apply -f client-deployment.yaml
-- To update existing pods, deployments  Change config.yaml → change image name, change replicas etc, use apply command
-$Kubectl apply -f updated-config-file.yaml
-
-4. Create 
+3. Create 
 $kubectl create -f pod-definition.yml
 $kubectl create -f replicaSet-definition.yml
-$kubectl create deployment --image=nginx nginx --dry-run=client -o yaml
+$kubectl create deployment --image=nginx nginx --> without defn file
 
 
+4. Dry run
+$kubectl create deployment --image=nginx mynginx --dry-run -o yaml
+$kubectl create deployment --image=nginx mynginx --dry-run -o yaml > nginx-dep.yml
+$kubectl expose pod myapp-pod --port=6379 --name redis-service --dry-run -o yaml --> Create a Service redis-service type ClusterIP & expose pod on port 6379
+
+
+5. service
+Expose --> This will automatically use the pod's labels as selectors
+Create --> This will not use the pods labels as selectors, instead it will assume selectors as app
+
+$kubectl expose pod redis-pod --port=6379 --name redis-service
+$kubectl expose pod myapp-pod --port=6379 --name redis-service --dry-run -o yaml --> Create a Service redis-service type ClusterIP & expose pod on port 6379
+$kubectl expose pod nginx-pod --port=80   --name nginx-service --type=NodePort --dry-run -o yaml
+
+$kubectl create service clusterip redis --tcp=6379:6379 --dry-run -o yaml --> will assume selectors as app=redis
+$kubectl create service nodeport  nginx --tcp=80:80 --node-port=30080 --dry-run -o yaml
 
 5. See running objects
-$kubectl get pods , kubectl get pods -o wide
+$kubectl get pods 
+$kubectl get pods -o wide/json/yaml/name
 $kubectl get services
 $kubectl get deployments
 $kubectl get storageclass
@@ -37,21 +45,22 @@ $kubectl describe pods client-pod
 $kubectl describe replicaset new-replica-set
 
 
-7. Delete POD
+7. Delete Objects
 $kubectl delete pod <pod> [pod and podsa both work]
 $kubectl delete pods <pod>
 $kubectl delete -f client-pod.yaml
 $kubectl delete deployment client-deployment
 $kubectl delete service client-node-port
 $kubectl delete replicaset replicaset-1
-$ kubectl delete rs new-replica-set
+$kubectl delete rs new-replica-set
 
 8. Logs/access container shell etc
 $kubectl logs <Pod>
 $kubectl exec -it client-deployment-6854fd9595-4bq4h sh
 
-9. Get detailed info about object
+9. Describe objects - Get detailed info about object
 $kubectl describe pods client-pod
+$kubectl describe rs client-rs
 
 10. Update using set command
 $kubectl set image <Type of object>/<objectName> <Container Name> = <new image to use>
@@ -72,7 +81,14 @@ $ kubectl get rs new-replica-set -o yaml > myrs.yml
 $ kubectl replace -f replicaset-def.yml
 
 15.Scale RS
-$ kubectl scale rs new-replica-set --replicas=5 --> using  <Type> and  <Name>
+$ kubectl scale rs my-replica-set --replicas=5 --> using  <Type> and  <Name>
 
 
+16. Create/Update Objects in K8s using apply
+$kubectl apply -f client-pod.yaml
+$kubectl apply -f client-node-port.yaml
+- Use deployment file
+$kubectl apply -f client-deployment.yaml
+- To update existing pods, deployments  Change config.yaml → change image name, change replicas etc, use apply command
+$Kubectl apply -f updated-config-file.yaml
 

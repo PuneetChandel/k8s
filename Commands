@@ -18,6 +18,10 @@ $Kubectl apply -f updated-config-file.yaml
 
 4. Create 
 $kubectl create -f pod-definition.yml
+$kubectl create -f replicaSet-definition.yml
+$kubectl create deployment --image=nginx nginx --dry-run=client -o yaml
+
+
 
 5. See running objects
 $kubectl get pods , kubectl get pods -o wide
@@ -25,9 +29,13 @@ $kubectl get services
 $kubectl get deployments
 $kubectl get storageclass
 $kubectl get nodes
+$kubectl get all
+$kubectl get replicaset / get rs
 
 6. Describe objects, detail information
 $kubectl describe pods client-pod
+$kubectl describe replicaset new-replica-set
+
 
 7. Delete POD
 $kubectl delete pod <pod> [pod and podsa both work]
@@ -35,6 +43,8 @@ $kubectl delete pods <pod>
 $kubectl delete -f client-pod.yaml
 $kubectl delete deployment client-deployment
 $kubectl delete service client-node-port
+$kubectl delete replicaset replicaset-1
+$ kubectl delete rs new-replica-set
 
 8. Logs/access container shell etc
 $kubectl logs <Pod>
@@ -52,8 +62,17 @@ $kubectl create secret generic pgpassword --from-literal PGPASSWORD=12345asdf
 
 12. Edit the k8s pod file
 $ kubectl edit pod myapp-pod
+$ kubectl edit rs myapp-replicaSet
 
 13. Generate pod definition
 $ kubectl get pod <pod-name> -o yaml > pod-definition.yaml
+$ kubectl get rs new-replica-set -o yaml > myrs.yml
+
+14. Replace configuration
+$ kubectl replace -f replicaset-def.yml
+
+15.Scale RS
+$ kubectl scale rs new-replica-set --replicas=5 --> using  <Type> and  <Name>
+
 
 

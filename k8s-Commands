@@ -8,7 +8,7 @@ $kubectl create -f pod-definition.yml
 $kubectl create -f replicaSet-definition.yml
 $kubectl create -f ns-definition.yml
 $kubectl create -f quota-def.yml
-
+$kubectl create -f config-map.yml
 
 3. Imperative commands
 $kubectl run nginx --image ngnix 
@@ -41,6 +41,11 @@ $kubectl scale deployment/webapp --replicas=3
 $kubectl create deployment redis-deploy  --image=redis --namespace=dev-ns --dry-run=client -o yaml > redis-deploy.yml
 $kubectl apply -f redis-deploy.yml
 
+$ kubectl create configmap webapp-config-map --from-literal=APP_COLOR=darkblue
+
+$ kubectl create secret generic db-secret --from-literal DB_Host=sql01 --from-literal DB_User=root --from-literal DB_Password=password123
+
+
 4. Dry run
 $kubectl create deployment --image=nginx mynginx --dry-run -o yaml
 $kubectl create deployment --image=nginx mynginx --dry-run -o yaml > nginx-dep.yml
@@ -72,9 +77,14 @@ $kubectl get nodes
 $kubectl get all
 $kubectl get replicaset / get rs
 
+$kubectl get configMaps
+$ kubectl get secrets
+
+
 6. Describe objects, detail information
 $kubectl describe pods client-pod
 $kubectl describe replicaset new-replica-set
+$kubectl describe configMaps db-config
 
 
 7. Delete Objects
@@ -98,12 +108,12 @@ $kubectl describe rs client-rs
 $kubectl set image <Type of object>/<objectName> <Container Name> = <new image to use>
 $kubectl set image deployment/client-deployment client=pchandel/multi-client:v5
 
-11. Create Secret
-$kubectl create secret generic pgpassword --from-literal PGPASSWORD=12345asdf
+
 
 12. Edit the k8s pod file
 $ kubectl edit pod myapp-pod
 $ kubectl edit rs myapp-replicaSet
+$ kubectl edit deployment my-deployment
 
 13. Generate pod definition
 $ kubectl get pod <pod-name> -o yaml > pod-definition.yaml

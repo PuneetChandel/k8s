@@ -3,6 +3,11 @@
 1. Check Status of cluster
 $kubectl cluster-info
 
+
+2. explain pods , servics etc to see config file
+$ kubectl explain pods --recrsive | less
+$ kubectl explain pods --recrsive | grep -A8 envFrom --> show 8 lines from envFrom
+
 2. Create 
 $kubectl create -f pod-definition.yml
 $kubectl create -f replicaSet-definition.yml
@@ -43,7 +48,7 @@ $kubectl apply -f redis-deploy.yml
 
 $ kubectl create configmap webapp-config-map --from-literal=APP_COLOR=darkblue
 
-$ kubectl create secret generic db-secret --from-literal DB_Host=sql01 --from-literal DB_User=root --from-literal DB_Password=password123
+$ kubectl create secret generic db-secret :iteral DB_Password=password123
 
 
 4. Dry run
@@ -69,6 +74,7 @@ $kubectl get pods
 $kubectl get pods -o wide/json/yaml/name
 $kubectl get pods --namespace=dev
 $kubectl get pods --all-namespaces
+$kubectl get pods,svc 
 
 $kubectl get services
 $kubectl get deployments
@@ -78,13 +84,14 @@ $kubectl get all
 $kubectl get replicaset / get rs
 
 $kubectl get configMaps
-$ kubectl get secrets
+$kubectl get secrets
 
 
 6. Describe objects, detail information
 $kubectl describe pods client-pod
 $kubectl describe replicaset new-replica-set
 $kubectl describe configMaps db-config
+$kubectl describe secrets db-secrets
 
 
 7. Delete Objects
@@ -96,9 +103,12 @@ $kubectl delete service client-node-port
 $kubectl delete replicaset replicaset-1
 $kubectl delete rs new-replica-set
 
-8. Logs/access container shell etc
+8. Logs
 $kubectl logs <Pod>
+
+9. execute command
 $kubectl exec -it client-deployment-6854fd9595-4bq4h sh
+$kubectl exec -it ubuntu-sleeper -- date -s '19 APR 2012 11:14:00'
 
 9. Describe objects - Get detailed info about object
 $kubectl describe pods client-pod

@@ -15,6 +15,7 @@ $kubectl create -f ns-definition.yml
 $kubectl create -f quota-def.yml
 $kubectl create -f config-map.yml
 
+
 3. Imperative commands
 $kubectl run nginx --image ngnix 
 $kubectl run nginx-pod --image=nginx:alpine
@@ -49,6 +50,7 @@ $kubectl apply -f redis-deploy.yml
 $ kubectl create configmap webapp-config-map --from-literal=APP_COLOR=darkblue
 
 $ kubectl create secret generic db-secret :iteral DB_Password=password123
+$ kubectl create serviceaccount vsc_account
 
 
 4. Dry run
@@ -106,9 +108,11 @@ $kubectl delete rs new-replica-set
 8. Logs
 $kubectl logs <Pod>
 
-9. execute command
+9. execute command or got to shell
 $kubectl exec -it client-deployment-6854fd9595-4bq4h sh
 $kubectl exec -it ubuntu-sleeper -- date -s '19 APR 2012 11:14:00'
+$kubectl exec -it myapp-pod ls /var/run/secrets/kubernetes.io/serviceaccount
+
 
 9. Describe objects - Get detailed info about object
 $kubectl describe pods client-pod
@@ -120,7 +124,7 @@ $kubectl set image deployment/client-deployment client=pchandel/multi-client:v5
 
 
 
-12. Edit the k8s pod file
+12. Edit the k8s files
 $ kubectl edit pod myapp-pod
 $ kubectl edit rs myapp-replicaSet
 $ kubectl edit deployment my-deployment
@@ -137,10 +141,13 @@ $ kubectl scale rs my-replica-set --replicas=5 --> using  <Type> and  <Name>
 
 
 16. Create/Update Objects in K8s using apply
+
 $kubectl apply -f client-pod.yaml
 $kubectl apply -f client-node-port.yaml
+
 - Use deployment file
 $kubectl apply -f client-deployment.yaml
+
 - To update existing pods, deployments  Change config.yaml → change image name, change replicas etc, use apply command
 $Kubectl apply -f updated-config-file.yaml
 

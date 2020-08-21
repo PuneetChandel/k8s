@@ -52,6 +52,9 @@ $ kubectl create configmap webapp-config-map --from-literal=APP_COLOR=darkblue
 $ kubectl create secret generic db-secret :iteral DB_Password=password123
 $ kubectl create serviceaccount vsc_account
 
+--
+$ kubectl label nodes node01 size=large
+$ kubectl taint nodes node01 spray=mortein:NoSchedule
 
 4. Dry run
 $kubectl create deployment --image=nginx mynginx --dry-run -o yaml
@@ -88,6 +91,7 @@ $kubectl get replicaset / get rs
 $kubectl get configMaps
 $kubectl get secrets
 
+$kubectl get nodes --show-labels
 
 6. Describe objects, detail information
 $kubectl describe pods client-pod
@@ -157,7 +161,7 @@ $Kubectl apply -f updated-config-file.yaml
 $kubectl config set-context $(kubectl config current-context) --namespace=dev
 
 
-18. taint and toleration
+18. Taint and toleration
 $ kubectl taint nodes node-name key=value:taint-effect --> taint effect : NoSchedule, PreferNoSchedule, NoExecute
 $ kubectl taint nodes node01 spray=mortein:NoSchedule --> Add Taint
 $ kubectl taint nodes node1 key:NoSchedule-   --> remove with "-"
@@ -167,6 +171,24 @@ Add toleration to pod
     operator: "Equals"
     value: "mortein"
     effect: "NoSchedule"
+
+19. Node selector
+$kubectl label nodes node01 size=large -->  Add Label on Node
+nodeSelector: --> Add nodeSelector on Pod
+ size=large
+
+20. Node affinity
+   affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: disktype
+            operator: In
+            values:
+            - ssd        
+
+
   
  
 

@@ -16,45 +16,7 @@ $kubectl create -f quota-def.yml
 $kubectl create -f config-map.yml
 
 
-3. Imperative commands
-$kubectl run nginx --image ngnix 
-$kubectl run nginx-pod --image=nginx:alpine
-$kubectl run redis --image redis:alpine -l tier=db
-$kubectl run custom-nginx --image nginx --port=8080
-$kubectl run httpd --image=httpd:alpine --port=80 --expose
-$kubectl run redis --image redis --namespace=finance
 
-
-$kubectl create deployment mynginx --image=nginx  
-$kubectl create deployment webapp --image=kodekloud/webapp-color
-$kubectl create deployment redis-deploy  --image=redis --namespace=dev-ns
-
-$kubectl create ns dev-ns
-$kubectl create namespace dev-ns
-
-
-$kubectl expose pod myapp-pod --port=6379 --name redis-service --type=ClusterIP 
-$kubectl expose pod nginx-pod --port=80   --name nginx-service --type=NodePort
-$kubectl expose pod redis --port=6379 --name=redis-service
-
-$kubectl create service clusterip redis --tcp=6379:6379 --> will assume selectors as app=redis
-$kubectl create service nodeport  nginx --tcp=80:80 --node-port=30080
-
-$kubectl scale rs my-replica-set --replicas=5
-$kubectl scale deployment/webapp --replicas=3
-
--- 
-$kubectl create deployment redis-deploy  --image=redis --namespace=dev-ns --dry-run=client -o yaml > redis-deploy.yml
-$kubectl apply -f redis-deploy.yml
-
-$ kubectl create configmap webapp-config-map --from-literal=APP_COLOR=darkblue
-
-$ kubectl create secret generic db-secret :iteral DB_Password=password123
-$ kubectl create serviceaccount vsc_account
-
---
-$ kubectl label nodes node01 size=large
-$ kubectl taint nodes node01 spray=mortein:NoSchedule
 
 4. Dry run
 $kubectl create deployment --image=nginx mynginx --dry-run -o yaml
@@ -160,6 +122,18 @@ $Kubectl apply -f updated-config-file.yaml
 17. set Context to dev namespace
 $kubectl config set-context $(kubectl config current-context) --namespace=dev
 
+POD
+  securityContext: 
+    runAsUser: 1000
+    runAsGroup: 3000
+    fsGroup: 2000
+   
+  containers:
+  - name: sec-ctx-4
+    image: gcr.io/google-samples/node-hello:1.0
+    securityContext:
+      capabilities:
+        add: ["NET_ADMIN", "SYS_TIME"] 
 
 18. Taint and toleration
 $ kubectl taint nodes node-name key=value:taint-effect --> taint effect : NoSchedule, PreferNoSchedule, NoExecute
@@ -190,6 +164,46 @@ nodeSelector: --> Add nodeSelector on Pod
 
 
   
+Imperative Commands
+
+$kubectl run nginx --image ngnix 
+$kubectl run nginx-pod --image=nginx:alpine
+$kubectl run redis --image redis:alpine -l tier=db
+$kubectl run custom-nginx --image nginx --port=8080
+$kubectl run httpd --image=httpd:alpine --port=80 --expose
+$kubectl run redis --image redis --namespace=finance
+
+
+$kubectl create deployment mynginx --image=nginx  
+$kubectl create deployment webapp --image=kodekloud/webapp-color
+$kubectl create deployment redis-deploy  --image=redis --namespace=dev-ns
+
+$kubectl create ns dev-ns
+$kubectl create namespace dev-ns
+
+
+$kubectl expose pod myapp-pod --port=6379 --name redis-service --type=ClusterIP 
+$kubectl expose pod nginx-pod --port=80   --name nginx-service --type=NodePort
+$kubectl expose pod redis --port=6379 --name=redis-service
+
+$kubectl create service clusterip redis --tcp=6379:6379 --> will assume selectors as app=redis
+$kubectl create service nodeport  nginx --tcp=80:80 --node-port=30080
+
+$kubectl scale rs my-replica-set --replicas=5
+$kubectl scale deployment/webapp --replicas=3
+
+-- 
+$kubectl create deployment redis-deploy  --image=redis --namespace=dev-ns --dry-run=client -o yaml > redis-deploy.yml
+$kubectl apply -f redis-deploy.yml
+
+$ kubectl create configmap webapp-config-map --from-literal=APP_COLOR=darkblue
+
+$ kubectl create secret generic db-secret :iteral DB_Password=password123
+$ kubectl create serviceaccount vsc_account
+
+--
+$ kubectl label nodes node01 size=large
+$ kubectl taint nodes node01 spray=mortein:NoSchedule
  
 
 

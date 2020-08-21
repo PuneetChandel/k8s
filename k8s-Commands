@@ -95,6 +95,8 @@ $kubectl describe replicaset new-replica-set
 $kubectl describe configMaps db-config
 $kubectl describe secrets db-secrets
 
+To see master node
+$kubectl decribe node kubemaster | grep Taint
 
 7. Delete Objects
 $kubectl delete pod <pod> [pod and podsa both work]
@@ -153,4 +155,20 @@ $Kubectl apply -f updated-config-file.yaml
 
 17. set Context to dev namespace
 $kubectl config set-context $(kubectl config current-context) --namespace=dev
+
+
+18. taint and toleration
+$ kubectl taint nodes node-name key=value:taint-effect --> taint effect : NoSchedule, PreferNoSchedule, NoExecute
+$ kubectl taint nodes node01 spray=mortein:NoSchedule --> Add Taint
+$ kubectl taint nodes node1 key:NoSchedule-   --> remove with "-"
+Add toleration to pod
+  tolerations:
+  - key: "spray"
+    operator: "Equals"
+    value: "mortein"
+    effect: "NoSchedule"
+  
+ 
+
+
 

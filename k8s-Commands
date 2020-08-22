@@ -43,6 +43,9 @@ $kubectl get pods --namespace=dev
 $kubectl get pods --all-namespaces
 $kubectl get pods,svc 
 
+$kubectl get pods --selector bu=finance
+
+
 $kubectl get services
 $kubectl get deployments
 $kubectl get storageclass
@@ -191,7 +194,7 @@ $kubectl top pod
 Imperative Commands
 --------------------------------
 
-$kubectl run nginx --image ngnix 
+$kubectl run nginx --image ngnix --> creates a dep + pod + rs from an image
 $kubectl run nginx-pod --image=nginx:alpine
 $kubectl run redis --image redis:alpine -l tier=db
 $kubectl run custom-nginx --image nginx --port=8080
@@ -238,5 +241,25 @@ $ kubectl taint nodes node01 spray=mortein:NoSchedule
 $ kubectl exec app -- cat /log/app.log
 $ kubectl exec -it client-deployment-6854fd9595-4bq4h sh
 $ kubectl exec -it app -- sh
+
+$ kubectl rollout status deployment/client-deployment
+$ kubectl rollout history deployment/client-deployment
+$ kubectl rollout undo deployment/client-deployment
+
+---
+
+Updating deployment
+1. update image in yaml file and kubectl apply, or
+2. kubectl set image deployment/myapp-dep nginx=nginx:1.9.1 
+
+-----
+Create -> get -> Update -> Status -> rollback
+$kubectl create -f dep.yml / kubectl create deployment nginx --image=nginx:1.16
+$kubectl get deployents
+$kubectl apply -f dep.yml
+$kubectl set image deployment/myapp-dep nginx=nginx:1.9.1 --record [use record to show that in change clause]
+$kubectl rollout status deployment/client-deployment
+$kubectl rollout undo deployment/client-deployment
+$kubectl rollout history deployment/client-deployment --revision=2 
 
 

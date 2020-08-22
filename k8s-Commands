@@ -208,5 +208,9 @@ $ kubectl label nodes node01 size=large
 $ kubectl taint nodes node01 spray=mortein:NoSchedule
  
 
+--
+$ kubectl exec app -- cat /log/app.log
+$ kubectl exec -it client-deployment-6854fd9595-4bq4h sh
+$ kubectl exec -it app -- sh
 
 

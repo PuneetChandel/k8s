@@ -164,7 +164,9 @@ nodeSelector: --> Add nodeSelector on Pod
 
 
   
+--------------------------------
 Imperative Commands
+--------------------------------
 
 $kubectl run nginx --image ngnix 
 $kubectl run nginx-pod --image=nginx:alpine

@@ -75,6 +75,10 @@ $kubectl delete rs new-replica-set
 
 8. Logs
 $kubectl logs <Pod>
+$kubectl logs -f <Pod> --> To stream live logs
+$kubectl logs -f <Pod> <container>--> To see logs in a multi container pod
+
+
 
 9. execute command or got to shell
 $kubectl exec -it client-deployment-6854fd9595-4bq4h sh
@@ -180,6 +184,9 @@ spec:
       initialDelaySeconds: 15
       periodSeconds: 20
   
+21. metric server
+$kubectl top node
+$kubectl top pod
 --------------------------------
 Imperative Commands
 --------------------------------

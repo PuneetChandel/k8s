@@ -162,7 +162,23 @@ nodeSelector: --> Add nodeSelector on Pod
             values:
             - ssd        
 
-
+21. Readiness/Liveness
+spec:
+  containers:
+  - name: goproxy
+    image: k8s.gcr.io/goproxy:0.1
+    ports:
+    - containerPort: 8080
+    readinessProbe:
+      tcpSocket:
+        port: 8080
+      initialDelaySeconds: 5
+      periodSeconds: 10
+    livenessProbe:
+      tcpSocket:
+        port: 8080
+      initialDelaySeconds: 15
+      periodSeconds: 20
   
 --------------------------------
 Imperative Commands
@@ -174,6 +190,9 @@ $kubectl run redis --image redis:alpine -l tier=db
 $kubectl run custom-nginx --image nginx --port=8080
 $kubectl run httpd --image=httpd:alpine --port=80 --expose
 $kubectl run redis --image redis --namespace=finance
+
+$kubectl create deployment --image=nginx mynginx --dry-run -o yaml > nginx-dep.yml
+$kubectl run yellow --image=redis --restart=Never --dry-run=true -o yaml
 
 
 $kubectl create deployment mynginx --image=nginx  

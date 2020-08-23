@@ -58,6 +58,10 @@ $kubectl get secrets
 
 $kubectl get nodes --show-labels
 
+$kubectl get jobs
+$kubectl get CronJob
+
+
 6. Describe objects, detail information
 $kubectl describe pods client-pod
 $kubectl describe replicaset new-replica-set
@@ -75,6 +79,8 @@ $kubectl delete deployment client-deployment
 $kubectl delete service client-node-port
 $kubectl delete replicaset replicaset-1
 $kubectl delete rs new-replica-set
+$kubectl delete job new-job
+
 
 8. Logs
 $kubectl logs <Pod>
@@ -257,9 +263,15 @@ Create -> get -> Update -> Status -> rollback
 $kubectl create -f dep.yml / kubectl create deployment nginx --image=nginx:1.16
 $kubectl get deployents
 $kubectl apply -f dep.yml
-$kubectl set image deployment/myapp-dep nginx=nginx:1.9.1 --record [use record to show that in change clause]
+$kubectl set image deployment/myapp-dep nginx=nginx:1.12 --record [use record to show that in change clause]
 $kubectl rollout status deployment/client-deployment
-$kubectl rollout undo deployment/client-deployment
+
 $kubectl rollout history deployment/client-deployment --revision=2 
+$kubectl rollout undo deployment/client-deployment
+  -- will undo current verison (v10)
+  -- make the version previous to current as current(v9)
+  -- before undo v8, v9, v10
+  -- so after undo v8, v10, v11(created from v9)
+  
 
 

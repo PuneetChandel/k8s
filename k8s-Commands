@@ -18,6 +18,7 @@ $kubectl create -f config-map.yml
 
 
 
+
 4. Dry run
 $kubectl create deployment --image=nginx mynginx --dry-run -o yaml
 $kubectl create deployment --image=nginx mynginx --dry-run -o yaml > nginx-dep.yml
@@ -220,6 +221,7 @@ $kubectl create deployment redis-deploy  --image=redis --namespace=dev-ns
 
 $kubectl create ns dev-ns
 $kubectl create namespace dev-ns
+$kubectl create namespace ingress-namespace
 
 
 $kubectl expose pod myapp-pod --port=6379 --name redis-service --type=ClusterIP 

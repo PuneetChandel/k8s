@@ -61,6 +61,9 @@ $kubectl get nodes --show-labels
 $kubectl get jobs
 $kubectl get CronJob
 
+$kubectl get ingress --all-namespaces
+
+
 
 6. Describe objects, detail information
 $kubectl describe pods client-pod

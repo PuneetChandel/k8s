@@ -240,7 +240,7 @@ $kubectl apply -f redis-deploy.yml
 
 $ kubectl create configmap webapp-config-map --from-literal=APP_COLOR=darkblue
 
-$ kubectl create secret generic db-secret :iteral DB_Password=password123
+$ kubectl create secret generic dev-db-secret --from-literal=username=devuser --from-literal=password='S!B\*d$zDsb='
 $ kubectl create serviceaccount vsc_account
 
 --

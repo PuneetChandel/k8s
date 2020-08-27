@@ -138,6 +138,7 @@ $Kubectl apply -f updated-config-file.yaml
 
 17. set Context to dev namespace
 $kubectl config set-context $(kubectl config current-context) --namespace=dev
+$kubectl config set-context --current --namespace=ggckad-s2
 
 POD
   securityContext: 

@@ -98,6 +98,14 @@ $kubectl exec -it client-deployment-6854fd9595-4bq4h sh
 $kubectl exec -it ubuntu-sleeper -- date -s '19 APR 2012 11:14:00'
 $kubectl exec -it myapp-pod ls /var/run/secrets/kubernetes.io/serviceaccount
 
+Pod.yml
+containers:
+- 
+ command: ["/bin/sh"]
+ args: ["-c", "while true; do echo hello; sleep 10;done"]
+
+
+
 
 9. Describe objects - Get detailed info about object
 $kubectl describe pods client-pod

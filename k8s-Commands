@@ -33,6 +33,9 @@ type -->  "ClusterIP", "ExternalName", "LoadBalancer", "NodePort"
 $kubectl expose pod redis-pod --port=6379 --name redis-service
 $kubectl expose pod myapp-pod --port=6379 --name redis-service --dry-run -o yaml --> Create a Service redis-service type ClusterIP & expose pod on port 6379
 $kubectl expose pod nginx-pod --port=80   --name nginx-service --type=NodePort --dry-run -o yaml
+$kubectl -n marketing expose deployment redis --port=6379  --target-port=6379 --name messaging-service --dry-run=client -o yaml > svc.yml
+
+
 
 $kubectl create service clusterip redis --tcp=6379:6379 --dry-run -o yaml --> will assume selectors as app=redis
 $kubectl create service nodeport  nginx --tcp=80:80 --node-port=30080 --dry-run -o yaml
@@ -251,6 +254,9 @@ $ kubectl create configmap webapp-config-map --from-literal=APP_COLOR=darkblue
 
 $ kubectl create secret generic dev-db-secret --from-literal=username=devuser --from-literal=password='S!B\*d$zDsb='
 $ kubectl create serviceaccount vsc_account
+
+
+$ kubectl create secret generic db-secret-xxdf --from-literal=DB_Host=sql01 --from-literal=DB_User=root --from-literal=DB_Password=password123
 
 --
 $ kubectl label nodes node01 size=large

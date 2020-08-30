@@ -223,6 +223,8 @@ $kubectl run custom-nginx --image nginx --port=8080
 $kubectl run httpd --image=httpd:alpine --port=80 --expose
 $kubectl run redis --image redis --namespace=finance
 
+$kk run beta-apps --image=nginx --replicas=3 --dry-run -o yaml > betdep.yaml
+
 $kubectl create deployment --image=nginx mynginx --dry-run -o yaml > nginx-dep.yml
 $kubectl run yellow --image=redis --restart=Never --dry-run=true -o yaml
 

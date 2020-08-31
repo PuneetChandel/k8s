@@ -228,6 +228,8 @@ $kk run beta-apps --image=nginx --replicas=3 --dry-run -o yaml > betdep.yaml
 $kubectl create deployment --image=nginx mynginx --dry-run -o yaml > nginx-dep.yml
 $kubectl run yellow --image=redis --restart=Never --dry-run=true -o yaml
 
+-- create temp pod (rm) and run command wget
+$kk run busybox101 --image=busybox --restart=Never --rm -it --command  wget 10.1.2.196:80
 
 $kubectl create deployment mynginx --image=nginx  
 $kubectl create deployment webapp --image=kodekloud/webapp-color
@@ -259,6 +261,9 @@ $ kubectl create serviceaccount vsc_account
 
 
 $ kubectl create secret generic db-secret-xxdf --from-literal=DB_Host=sql01 --from-literal=DB_User=root --from-literal=DB_Password=password123
+
+$ kk create job job1 --image=busybox --dry-run=true -o yaml -- /bin/sh -c 'echo hello; sleep 500'> job.yaml
+ 
 
 --
 $ kubectl label nodes node01 size=large

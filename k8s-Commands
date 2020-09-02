@@ -216,6 +216,7 @@ $kubectl top pod
 Imperative Commands
 --------------------------------
 
+RUN--
 $kubectl run nginx --image ngnix --> creates a dep + pod + rs from an image
 $kubectl run nginx-pod --image=nginx:alpine
 $kubectl run redis --image redis:alpine -l tier=db
@@ -224,6 +225,11 @@ $kubectl run httpd --image=httpd:alpine --port=80 --expose
 $kubectl run redis --image redis --namespace=finance
 
 $kk run beta-apps --image=nginx --replicas=3 --dry-run -o yaml > betdep.yaml
+
+kubectl run # without flag creates a deployment
+kubectl run — restart=Never #Creates a Pod
+kubectl run — restart=OnFailure #Creates a job
+kubectl run — restart=OnFailure — schedule=”* * * * *” # Creates a cronjob
 
 $kubectl create deployment --image=nginx mynginx --dry-run -o yaml > nginx-dep.yml
 $kubectl run yellow --image=redis --restart=Never --dry-run=true -o yaml

@@ -1,0 +1,10 @@
+https://minikube.sigs.k8s.io/docs/handbook/kubectl/
+
+1. minikube start
+2. To use minikube kubectl
+  minikube kubectl -- <kubectl commands>
+  
+3. create alias
+alias kubectl="minikube kubectl --"
+
+4. minikube stop

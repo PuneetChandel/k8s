@@ -1,3 +1,5 @@
+# POD
+
 apiVersion: v1
 kind: Pod
 metadata:
@@ -6,8 +8,6 @@ metadata:
   type: frontend
   app: myapp
 spec:
-
-
  containers:
   - command:
      - /bin/sh
@@ -24,3 +24,24 @@ spec:
  volumes:
    - name: test-volume
      emptyDir: {}
+
+
+# ReplicaSet
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+ name: myRS
+ labels:
+  type: frontend
+  app: myapp
+spec:
+ template:
+  metadata: # from pod
+  spec: # from pod
+  
+ replicas: 3
+ selector:
+  matchLabels: # which POD to use
+    type: frontend
+    
+  

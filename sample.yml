@@ -17,7 +17,8 @@ spec:
      - echo hello
     name: redis
     image: redis
-    
+    ports:
+        - containerPort: 80
     volumeMounts:
     - mountPath: /test-ebs
       name: test-volume
@@ -33,16 +34,44 @@ kind: ReplicaSet
 metadata:
  name: myRS
  labels:
-  type: frontend
+  type: rs
   app: myapp
 spec:
- template:
-  metadata: # from pod
-  spec: # from pod
-  
  replicas: 3
  selector:
   matchLabels: # which POD to use
     type: frontend
-    
+ template:
+  metadata: # from pod
+  spec: # from pod
+   containers: 
   
+
+    
+ # Deployment -- create RS as well
+
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+   name: nginx-depl
+   labels:
+     type: depapp
+     app: nginx-app
+ 
+spec: 
+  replicas: 3
+  selector:
+   matchLabels: # which POD to use
+    type: frontend
+    
+  template:
+   metadata: # from pod
+   spec: # from pod
+     containers: 
+     
+ 
+
+ 
+   
+   
+   

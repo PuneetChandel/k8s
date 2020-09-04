@@ -22,10 +22,37 @@ spec:
     volumeMounts:
     - mountPath: /test-ebs
       name: test-volume
-      
+    
+    env:
+     - name: APP_USER
+       value: myuser 
+       
+     - name : APP_COLOR
+       valueFrom:
+         confifMapKeyRef:
+           name: app-config
+           key: app_color
+     
+     - name : DB_pwd
+       valueFrom:
+         secretKeyRef:
+           name: app-secret
+           key: db_pass
+           
+    envFrom:
+      - configMapRef:
+          name: app-config
+      - secretRef:
+           name: app-config
  volumes:
    - name: test-volume
      emptyDir: {}
+   - name: config-vol
+     configMap:
+       name: app-config
+   - name: secret-vol
+     secret:
+       secretName: app-secret
 
 
 # ReplicaSet

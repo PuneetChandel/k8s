@@ -148,9 +148,13 @@ $kubectl apply -f client-deployment.yaml
 $Kubectl apply -f updated-config-file.yaml
 
 17. set Context to dev namespace
+
 $kubectl config set-context $(kubectl config current-context) --namespace=dev
 $kubectl config set-context --current --namespace=ggckad-s2
 
+18. Security Context
+
+# Can be at Pod or container level
 POD
   securityContext: 
     runAsUser: 1000
@@ -161,7 +165,8 @@ POD
   - name: sec-ctx-4
     image: gcr.io/google-samples/node-hello:1.0
     securityContext:
-      capabilities:
+      runAsUser: 1000
+      capabilities: ------------------> Only at Container Level not at POD
         add: ["NET_ADMIN", "SYS_TIME"] 
 
 18. Taint and toleration

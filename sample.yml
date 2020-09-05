@@ -18,10 +18,14 @@ spec:
     name: redis
     image: redis
     
-    resources:
+    resources: # in container
       requests:
          memory: "1Gi"
          cpu: 1
+      limits:
+         memory: "2Gi" # terminate
+         cpu: 2 # throttle
+         
     securityContext: # in container
       runAsUser: 1000
       capabilities: ------------------> Only at Container Level not at POD

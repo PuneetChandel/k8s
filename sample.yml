@@ -10,20 +10,30 @@ metadata:
   
 spec:
  containers:
-  - command:
+  - command: # in container
      - /bin/sh
      - -c
      - sleep 500
      - echo hello
     name: redis
     image: redis
+    
+    resources:
+      requests:
+         memory: "1Gi"
+         cpu: 1
+    securityContext: # in container
+      runAsUser: 1000
+      capabilities: ------------------> Only at Container Level not at POD
+        add: ["NET_ADMIN", "SYS_TIME"] 
+    
     ports:
         - containerPort: 80
-    volumeMounts:
+    volumeMounts: # in container
     - mountPath: /test-ebs
       name: test-volume
     
-    env:
+    env: # in container
      - name: APP_USER
        value: myuser 
        
@@ -39,7 +49,7 @@ spec:
            name: app-secret
            key: db_pass
            
-    envFrom:
+    envFrom: # in container
       - configMapRef:
           name: app-config
       - secretRef:

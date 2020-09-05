@@ -8,7 +8,29 @@ metadata:
   type: frontend
   app: myapp
   
-spec:
+spec: #---------------------------------------#
+
+ nodeName: kube-01 # OR use node Seelector or Node affinity
+ nodeSelector: 
+    size: large #large is the label on Node $kk label nodes node01 size=large
+ 
+ affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/e2e-az-name
+            operator: In
+            values:
+            - e2e-az1
+            - e2e-az2
+                
+ tolerations:
+    - key: "spray"
+      operator: "Equals"
+      value: "mortein"
+      effect: "NoSchedule"
+   
  containers:
   - command: # in container
      - /bin/sh
@@ -38,12 +60,6 @@ spec:
     - mountPath: /test-ebs
       name: test-volume
     
-    tolerations:
-     - key: "spray"
-       operator: "Equals"
-       value: "mortein"
-       effect: "NoSchedule"
-    
     env: # in container
      - name: APP_USER
        value: myuser 
@@ -65,6 +81,7 @@ spec:
           name: app-config
       - secretRef:
            name: app-config
+    #---------------------------------------#
  volumes:
    - name: test-volume
      emptyDir: {}

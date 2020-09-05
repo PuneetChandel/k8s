@@ -33,9 +33,16 @@ spec:
     
     ports:
         - containerPort: 80
+        
     volumeMounts: # in container
     - mountPath: /test-ebs
       name: test-volume
+    
+    tolerations:
+     - key: "spray"
+       operator: "Equals"
+       value: "mortein"
+       effect: "NoSchedule"
     
     env: # in container
      - name: APP_USER

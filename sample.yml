@@ -40,17 +40,19 @@ spec: #---------------------------------------#
     name: redis
     image: redis
     
-    readinessProbe: 
+    readinessProbe: # check if the app inside container is ready to accept requests
       tcpSocket: # httpGet, path, port | exec, command 
         port: 8080
       initialDelaySeconds: 5
       periodSeconds: 10
       
-    livenessProbe:
-      tcpSocket:
+    livenessProbe: # check if the app inside container is healthy and not stuck/freeze and need to be restarted
+      httpGet:
+        path: /healthz
         port: 8080
-      initialDelaySeconds: 15
-      periodSeconds: 20
+      initialDelaySeconds: 15 # wait before test
+      periodSeconds: 20 # how oftne to perform test
+      failureThreshold: 3 # Number of failures before restart
       
     
     resources: # in container

@@ -302,8 +302,8 @@ $kubectl create -f dep.yml / kubectl create deployment nginx --image=nginx:1.16
 $kubectl get deployents
 $kubectl apply -f dep.yml
 $kubectl set image deployment/myapp-dep nginx=nginx:1.12 --record [use record to show that in change clause]
-$kubectl rollout status deployment/client-deployment
 
+$kubectl rollout status deployment/client-deployment
 $kubectl rollout history deployment/client-deployment --revision=2 
 $kubectl rollout undo deployment/client-deployment
   -- will undo current verison (v10)

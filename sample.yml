@@ -7,10 +7,12 @@ metadata:
  labels:
   type: frontend
   app: myapp
+ annotations:
+   buildversoion: 1.1
   
 spec: #---------------------------------------#
 
- nodeName: kube-01 # OR use node Seelector or Node affinity
+ nodeName: kube-01 # OR use nodeSelector or Nodeaffinity
  nodeSelector: 
     size: large #large is the label on Node $kk label nodes node01 size=large
  
@@ -150,8 +152,48 @@ spec:
      containers: 
      
  
+# Job , will create POD as well
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi
+spec:
+  backoffLimit: 10 --> number of retries before assuming the job has failed
+  completions: 3 --> Number of completions, multiple Pods will be crated 
+  parallelism: 3 --> Number of pararllel pods to spin until total completions are met
+  template:
+    spec: # Spec for Pod  
+      containers: 
+      - name: pi
+        image: perl
+        command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+      restartPolicy: Never
+      
 
- 
+#Cron Job
+
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  
+  schedule: "*/1 * * * *"
+  
+  jobTemplate:
+    spec: # spec from Job
+      completions: 3
+      template:
+        spec: # spec for Pod
+          containers: 
+          - name: hello
+            image: busybox
+            args:
+            - /bin/sh
+            - -c
+            - date; echo Hello from the Kubernetes cluster
+          restartPolicy: OnFailure
+          
    
    
    

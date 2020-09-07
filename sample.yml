@@ -108,6 +108,10 @@ spec: #---------------------------------------#
    - name: secret-vol
      secret:
        secretName: app-secret
+   - name: host-vol
+     hostPath:
+       path: /data
+       type: Directory
 
 
 # ReplicaSet

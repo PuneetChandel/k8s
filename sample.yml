@@ -265,7 +265,33 @@ spec:
     servicePort: 80
     
     
-  
+# Network Policy, Need network solutions on k8s like kube-router, Romana etc
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: test-network-policy
+spec:
+  podSelector: # Pod to apply Policy On
+    matchLabels:
+      role: db
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          role: frontend
+    ports:
+    - protocol: TCP
+      port: 6379
+  egress:
+  - to:
+    ports:
+    - protocol: TCP
+      port: 5978
+      
   
   
       

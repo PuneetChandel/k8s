@@ -215,4 +215,57 @@ spec:
     type: front-end
   
   
+  # Ingress
+  # first need a ingress controller like nginx, haproxy, GCP LB etc 
+    ## LB, Monitor,ssl etc . Components for nginx-ingress-controller: Deployment, NodePort Service, ConfigMap, ServiceAccount
+  # and then add a Ingress resources
+  # Ingress
+  
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: simple-fanout-example
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules: # multiple rules may be for multiple host/domains 
+  - host: foo.bar.com 
+    http:
+      paths: # multiple paths for a host
+      - path: /foo
+        backend:
+          serviceName: service1
+          servicePort: 4200
+      - path: /bar
+        backend:
+          serviceName: service2
+          servicePort: 8080
+  - host: bar.foo.com
+    http:
+      paths:
+      - backend:
+          serviceName: service2
+          servicePort: 80
+          
+  - http: ## DEFAULT without a hostname, [Also c
+      paths:
+      - backend:
+          serviceName: service3
+          servicePort: 80
+          
+
+## Single service Ingress
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: test-ingress
+spec:
+  backend:
+    serviceName: testsvc
+    servicePort: 80
+    
+    
+  
+  
+  
       

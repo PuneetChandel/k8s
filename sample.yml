@@ -195,5 +195,24 @@ spec:
           restartPolicy: OnFailure
           
    
-   
-   
+# service
+# Cluster IP - accessing Pods from Pods to avoid point-point connection 
+# NodePort - accessing a frontend pod from different server
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+spec:
+  type: NodePort | LoadBalancer | CluserIP
+  ports:
+    - targetPort: 9376 # by default the `targetPort` is set to the same value as the `port` field.
+      port: 80 # Only MANDATORY Field 
+      nodePort: 30007 # By default Kubernetes will allocate a port from a range (default: 30000-32767)
+  
+  selector: # Link Pod. Will link pods on multiple Nodes as well, and service can be accessed using any Nodes IP in that case
+    app: myApp
+    type: front-end
+  
+  
+      

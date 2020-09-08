@@ -312,4 +312,7 @@ $kubectl rollout undo deployment/client-deployment
   -- so after undo v8, v10, v11(created from v9)
   
 
-
+-- Check network connectivity
+$ kk exec -it mypod -- sh
+# nc <destination> <port> 
+# nc -v -w 1 myservice 80

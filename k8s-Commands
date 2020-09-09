@@ -222,6 +222,20 @@ Imperative Commands
 --------------------------------
 
 RUN--
+
+$ kubectl run nginx --image=nginx 
+   --restart=Never 
+   --port=80 
+   --namespace=myname 
+   --command 
+   --serviceaccount=mysa1 
+   --env=HOSTNAME=local 
+   --labels=bu=finance,env=dev  
+   --requests='cpu=100m,memory=256Mi' 
+   --limits='cpu=200m,memory=512Mi' 
+   --dry-run=client -o yaml 
+   -- /bin/sh -c 'echo hello world'
+
 $kubectl run nginx --image ngnix --> creates a dep + pod + rs from an image
 $kubectl run nginx-pod --image=nginx:alpine
 $kubectl run redis --image redis:alpine -l tier=db

@@ -235,6 +235,8 @@ $ kubectl run nginx --image=nginx
    --limits='cpu=200m,memory=512Mi' 
    --dry-run=client -o yaml 
    -- /bin/sh -c 'echo hello world'
+   
+    kubectl run nginx --image=nginx --command -- <cmd> <arg1> ... <argN>
 
 $kubectl run nginx --image ngnix --> creates a dep + pod + rs from an image
 $kubectl run nginx-pod --image=nginx:alpine

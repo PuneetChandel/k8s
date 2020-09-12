@@ -332,3 +332,4 @@ $kubectl rollout undo deployment/client-deployment
 $ kk exec -it mypod -- sh
 # nc <destination> <port> 
 # nc -v -w 1 myservice 80
+# nc -zv nginx-service 80

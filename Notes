@@ -15,4 +15,11 @@ $kk config get-contexts
 $kk config set-context --current --namespace=myns
 
 
+VIM
+: se ic
+: /search
+: se nu
+: 
+
+
 

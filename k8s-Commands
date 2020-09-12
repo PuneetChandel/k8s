@@ -333,3 +333,5 @@ $ kk exec -it mypod -- sh
 # nc <destination> <port> 
 # nc -v -w 1 myservice 80
 # nc -zv nginx-service 80
+# kk exec nginx-deployment-57b89cc96-pfn7t -it -- sh -c 'nc -zv www.google.com 80'
+

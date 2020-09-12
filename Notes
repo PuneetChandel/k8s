@@ -4,3 +4,15 @@ Kubernetes.io
 - https://kubernetes.io/docs/tasks/
 - https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 - https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
+
+
+
+alias kk=kubectl
+export dd='--dry-run=client -oyaml' --> $ kk run mypod --image=nginx $dd > po.yaml
+
+$kk create ns myns
+$kk config get-contexts 
+$kk config set-context --current --namespace=myns
+
+
+

@@ -290,6 +290,7 @@ $ kubectl create serviceaccount vsc_account
 $ kubectl create secret generic db-secret-xxdf --from-literal=DB_Host=sql01 --from-literal=DB_User=root --from-literal=DB_Password=password123
 
 $ kk create job job1 --image=busybox --dry-run=true -o yaml -- /bin/sh -c 'echo hello; sleep 500'> job.yaml
+$ kk create cronjob mycj --image=busybox --schedule="*/1 * * * *" -- /bin/sh -c 'date; echo Hello from the Kubernetes cluster'
  
 
 --

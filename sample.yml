@@ -1,5 +1,24 @@
 # POD
-
+apiversion
+metadata
+spec
+  - nodeName
+  - nodeSelector
+  - affinity
+  - tolerations
+  - securityContext
+  - volumes
+  - containers
+      - readinessProbe
+      - livenessProbe
+      - resources
+      - securityContext
+      - ports 
+         - containerPort
+      - volumeMounts
+      - env
+      - envFrom
+  
 apiVersion: v1
 kind: Pod
 metadata:
@@ -16,7 +35,7 @@ spec:
  nodeSelector: 
     size: large #large is the label on Node $kk label nodes node01 size=large
  
- affinity: 
+ affinity: # spec
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
@@ -27,7 +46,7 @@ spec:
             - e2e-az1
             - e2e-az2
                 
- tolerations: 
+ tolerations: #spec
     - key: "spray"
       operator: "Equals"
       value: "mortein"
@@ -169,6 +188,7 @@ spec:
   backoffLimit: 10 --> number of retries before assuming the job has failed
   completions: 3 --> Number of completions, multiple Pods will be crated 
   parallelism: 3 --> Number of pararllel pods to spin until total completions are met
+  
   template:
     spec: # Spec for Pod  
       containers: 

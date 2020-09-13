@@ -336,3 +336,7 @@ $ kk exec -it mypod -- sh
 # nc -zv nginx-service 80
 # kk exec nginx-deployment-57b89cc96-pfn7t -it -- sh -c 'nc -zv www.google.com 80'
 
+
+
+--json
+kk get po nginx -o jsonpath='{.spec.containers[].name}{"\n"}'

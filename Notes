@@ -23,6 +23,11 @@ Terminal:
 echo -e 'new \n there ' >> test2.txt --> Append
 echo -e 'new \n there ' > test2.txt --> overwrite
 
+echo hello > test-file
+ps aux
+wget -O- --timeout=1 10.107.151.195
+
+
 kk explain pod.spec --recursive | less
 kk decsribe po mypod | grep -i -A10 events
 

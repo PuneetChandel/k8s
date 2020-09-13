@@ -19,6 +19,14 @@ VIM
 : se ic
 : /search
 
+Terminal:
+echo -e 'new \n there ' >> test2.txt --> Append
+echo -e 'new \n there ' > test2.txt --> overwrite
+
+kk explain pod.spec --recursive | less
+kk decsribe po mypod | grep -i -A10 events
+
+
 Review:
 - Lightening Mumshad + Mock
 - https://github.com/dgkanatsios/CKAD-exercises

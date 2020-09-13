@@ -18,8 +18,10 @@ $kk config set-context --current --namespace=myns
 VIM
 : se ic
 : /search
-: se nu
-: 
+
+Review:
+- Lightening Mumshad + Mock
+- https://github.com/dgkanatsios/CKAD-exercises
 
 
 

@@ -42,7 +42,7 @@ wget -O- --timeout=1 10.107.151.195
 
 wget -O- --timeout=1 google.com
 nc -zv -w 1 myservice 80
-curl --connect-timeout 20 google.com
+curl -v --connect-timeout 20 google.com
 
 
 Review:

@@ -31,6 +31,19 @@ wget -O- --timeout=1 10.107.151.195
 kk explain pod.spec --recursive | less
 kk decsribe po mypod | grep -i -A10 events
 
+-- Check network connectivity
+$ kk exec -it mypod -- sh
+# nc <destination> <port> 
+# nc -v -w 1 myservice 80
+# nc -zv nginx-service 80
+# kk exec nginx-deployment-57b89cc96-pfn7t -it -- sh -c 'nc -zv www.google.com 80'
+
+wget -O- --timeout=1 10.107.151.195
+
+wget -O- --timeout=1 google.com
+nc -zv -w 1 myservice 80
+curl --connect-timeout 20 google.com
+
 
 Review:
 - Lightening Mumshad + Mock

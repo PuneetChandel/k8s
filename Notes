@@ -50,4 +50,12 @@ Review:
 - https://github.com/dgkanatsios/CKAD-exercises
 
 
+access DNS
+within NS : db-service
+from another ns : db-service.prd.svc.cluster.local
+- db-service: name of service
+- prd : ns
+- svc: type
+- local.cluster : static 
+
 

@@ -1,0 +1,10 @@
+mvn clean install spring-boot:run
+docker build -t hello-world .
+
+docker run -p 8080:8080 hello-world
+
+upload to docker hub
+docker tag hello-world pchandel09/hello-world:1.0.0
+docker push pchandel09/hello-world:1.0.0
+
+docker run -d -p 8080:8080 pchandel09/hello-world:1.0.0
